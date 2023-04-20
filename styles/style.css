@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+    :root {
+      --primary-color: #38b000;
+      --secondary-color: #0d1b2a;
+      --light: #dddddde0;
+      --select: #1d2833;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      list-style: none;
+      font-family: "Poppins", sans-serif;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .navLinks {
+      width: 20%;
+      height: 100vh;
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .navLinks ul {
+      padding: 1rem;
+    }
+
+    .navLinks ul li {
+      padding: 0.5rem 0;
+    }
+
+    .navLinks ul :hover{
+        background-color: var(--select);
+        border-radius: 0.25rem;
+      }
+
+    .navLinks a {
+      color: white;
+    }
+
+    .navContent {
+      padding: 2rem;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    small {
+      color: var(--light);
+    }
+
+    #my_dataviz {
+      width: 100%;
+        height: 100%;
+    }
+
+    #video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .overviewContent{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .overviewCard{
+        width: 20%;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0px 2px 13px -1px rgba(0,0,0,0.6);
+}
