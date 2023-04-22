@@ -84,8 +84,17 @@
       }
 
       .overviewCard{
-        width: 20%;
-        padding: 1rem 1.5rem;
+        width: 15%;
+        padding: 1rem;
         border-radius: 0.5rem;
         box-shadow: 0px 2px 13px -1px rgba(0,0,0,0.6);
+}
+
+section{
+  display: flex;
+  align-items: center;
+}
+
+#admin-ico{
+  padding-left: 0.25rem;
 }
