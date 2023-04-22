@@ -1,14 +1,9 @@
 <?php
 
 $dataPoints = array(
-  array("label" => "label", "y" => 20),
-  array("label" => "label", "y" => 65),
-  array("label" => "label", "y" => 11),
-  array("label" => "label", "y" => 5),
-  array("label" => "label", "y" => 48),
-  array("label" => "label", "y" => 8),
-  array("label" => "label", "y" => 2),
-  array("label" => "label", "y" => 18)
+  array("label" => "Inside temperature", "y" => 20),
+  array("label" => "Outside temperature", "y" => 65),
+  array("label" => "Inside Humidity", "y" => 11),
 );
 
 ?>
@@ -44,7 +39,7 @@ $dataPoints = array(
           <i class="fas fa-temperature-low"></i> <a href="temp.php">Temperature</a>
         </li>
         <li><i class="fas fa-tint"></i> <a href="humidity.php">Humidity</a></li>
-        <li><i class="fas fa-percentage"></i> <a href="npk.php">NPK</a></li>
+        <li><i class="fas fa-percentage"></i> <a href="">NPK</a></li>
         <li><i class="fad fa-dewpoint"></i> <a href="waterTemp.php">Water Temperature</a></li>
         <li><i class="fas fa-ruler-horizontal"></i> <a href="ph.php">pH</a></li>
         <li><i class="fas fa-heat"></i> <a href="co2.php">CO2</a></li>
@@ -56,32 +51,7 @@ $dataPoints = array(
       </ul>
     </div>
     <div class="navContent">
-      <div class="overview">
-        <div class="overviewContent">
-          <div class="overviewCard">
-            <h4>Temperature</h4>
-            <h3>31°C</h3>
-          </div>
-          <div class="overviewCard">
-            <h4>Humidity</h4>
-            <h3>43%</h3>
-          </div>
-          <div class="overviewCard">
-            <h4>N:P:K</h4>
-            <h3>30:60:30</h3>
-          </div>
-          <div class="overviewCard">
-            <h4>pH</h4>
-            <h3>6.0</h3>
-          </div>
-          <div class="overviewCard">
-            <h4>Water Temp</h4>
-            <h3>32°C</h3>
-          </div>
-        </div>
-        <br>
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-      </div>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     </div>
   </div>
   <script src="https://kit.fontawesome.com/56016c02ef.js" crossorigin="anonymous"></script>
@@ -92,7 +62,7 @@ $dataPoints = array(
 
       var chart = new CanvasJS.Chart("chartContainer", {
         title: {
-          text: "Overview"
+          text: "NPK Ratio"
         },
         axisY: {
           minimum: 0,
@@ -106,6 +76,7 @@ $dataPoints = array(
           dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
         }]
       });
+
       function updateChart() {
         var color, deltaY, yVal;
         var dps = chart.options.data[0].dataPoints;
@@ -113,65 +84,23 @@ $dataPoints = array(
           deltaY = (2 + Math.random() * (-2 - 2));
           yVal = Math.min(Math.max(deltaY + dps[i].y, 0), 90);
           color = yVal > 75 ? "#FF2500" : yVal >= 50 ? "#FF6000" : yVal < 50 ? "#41CF35" : null;
-      
-          if (i == 0) {
-            dps[i] = {
-              label: "Temperatue (In)",
-              y: yVal,
-              color: color
-            };
-          } else if (i == 1) {
-            dps[i] = {
-              label: "Humidity (In)",
-              y: yVal,
-              color: color
-            };
-          } else if (i == 2) {
-            dps[i] = {
-              label: "CO2",
-              y: yVal,
-              color: color
-            };
-          } else if (i == 3) {
-            dps[i] = {
-              label: "Water Temperature",
-              y: yVal,
-              color: color
-            };
-          } else if (i == 4) {
-            dps[i] = {
-              label: "N",
-              y: yVal,
-              color: color
-            };
-          } else if (i == 5) {
-            dps[i] = {
-              label: "P",
-              y: yVal,
-              color: color
-            };
-          } else if (i == 6) {
-            dps[i] = {
-              label: "K",
-              y: yVal,
-              color: color
-            };
-          }else if (i == 7) {
-            dps[i] = {
-              label: "pH",
-              y: yVal,
-              color: color
-            };
-          }
+          dps[i] = {
+            label: "Core " + (i + 1),
+            y: yVal,
+            color: color
+          };
         }
         chart.options.data[0].dataPoints = dps;
         chart.render();
       };
       updateChart();
+
       setInterval(function() {
         updateChart()
       }, 1000);
+
     }
   </script>
 </body>
+
 </html>
