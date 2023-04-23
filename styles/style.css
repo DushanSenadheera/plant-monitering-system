@@ -98,3 +98,11 @@ section{
 #admin-ico{
   padding-left: 0.25rem;
 }
+
+.overviewCard h4{
+  color: var(--primary-color);
+}
+
+.overviewCard h3{
+  color: var(--secondary-color);
+}

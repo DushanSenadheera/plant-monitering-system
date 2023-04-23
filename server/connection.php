@@ -1,13 +1,14 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+$servername = "localhost";
+   $username = "esp32";
+   $password = "microcontrollerslab@123";
+   $database_name = "database_ESP32";
+
+   $connection = new mysqli($servername, $username, $password, $database_name);
+
+   if ($connection->connect_error) {
+      die("MySQL connection failed: " . $connection->connect_error);
+   }
+   
 ?>

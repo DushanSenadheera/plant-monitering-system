@@ -1,15 +1,25 @@
 <?php
 
-$dataPoints = array();
-$y = 5;
-for ($i = 0; $i < 10; $i++) {
-    $y += rand(-1, 1) * 0.1;
-    array_push($dataPoints, array("x" => $i, "y" => $y));
+$dataPoints1 = array();
+$dataPoints2 = array();
+$updateInterval = 2000; //in millisecond
+$initialNumberOfDataPoints = 100;
+$x = time() * 1000 - $updateInterval * $initialNumberOfDataPoints;
+$y1 = 75;
+$y2 = 60;
+// generates first set of dataPoints 
+for ($i = 0; $i < $initialNumberOfDataPoints; $i++) {
+    $y1 += round(rand(-2, 2));
+    $y2 += round(rand(-2, 2));
+    array_push($dataPoints1, array("x" => $x, "y" => $y1));
+    array_push($dataPoints2, array("x" => $x, "y" => $y2));
+    $x += $updateInterval;
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,16 +27,17 @@ for ($i = 0; $i < 10; $i++) {
     <link rel="stylesheet" href="styles/style.css">
     <title>Document</title>
 </head>
+
 <body>
     <nav>
-    <section>
-      <h2>Dashboard</h2>
-      <i class="fas fa-leaf"></i>
-    </section>
-    <section>
-      <h5>Admin</h5>
-      <i class="fas fa-user-shield" id="admin-ico"></i>
-    </section>
+        <section>
+            <h2>Dashboard</h2>
+            <i class="fas fa-leaf"></i>
+        </section>
+        <section>
+            <h5>Admin</h5>
+            <i class="fas fa-user-shield" id="admin-ico"></i>
+        </section>
     </nav>
     <div class="container">
         <div class="navLinks">
@@ -54,48 +65,97 @@ for ($i = 0; $i < 10; $i++) {
             <script>
                 window.onload = function() {
 
-                    var dataPoints = <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>;
+                    var updateInterval = <?php echo $updateInterval ?>;
+                    var dataPoints1 = <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>;
+                    var dataPoints2 = <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>;
+                    var yValue1 = <?php echo $y1 ?>;
+                    var yValue2 = <?php echo $y2 ?>;
+                    var xValue = <?php echo $x ?>;
 
                     var chart = new CanvasJS.Chart("chartContainer", {
-                        theme: "light2",
+                        zoomEnabled: true,
                         title: {
                             text: "Humidity"
                         },
                         axisX: {
-                            title: "Time in millisecond"
+                            title: ""
                         },
                         axisY: {
                             suffix: " %"
                         },
+                        toolTip: {
+                            shared: true
+                        },
+                        legend: {
+                            cursor: "pointer",
+                            verticalAlign: "top",
+                            fontSize: 22,
+                            fontColor: "dimGrey",
+                            itemclick: toggleDataSeries
+                        },
                         data: [{
-                            type: "line",
-                            yValueFormatString: "#,##0.0#",
-                            toolTipContent: "{y} %",
-                            dataPoints: dataPoints
-                        }]
+                                type: "line",
+                                name: "Inside",
+                                xValueType: "dateTime",
+                                yValueFormatString: "#,### %",
+                                xValueFormatString: "hh:mm:ss TT",
+                                showInLegend: true,
+                                legendText: "{name} " + yValue1 + " %",
+                                dataPoints: dataPoints1
+                            },
+                            {
+                                type: "line",
+                                name: "Outside",
+                                xValueType: "dateTime",
+                                yValueFormatString: "#,### %",
+                                showInLegend: true,
+                                legendText: "{name} " + yValue2 + " %",
+                                dataPoints: dataPoints2
+                            }
+                        ]
                     });
-                    chart.render();
 
-                    var updateInterval = 1500;
+                    chart.render();
                     setInterval(function() {
                         updateChart()
                     }, updateInterval);
 
-                    var xValue = dataPoints.length;
-                    var yValue = dataPoints[dataPoints.length - 1].y;
+                    function toggleDataSeries(e) {
+                        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        } else {
+                            e.dataSeries.visible = true;
+                        }
+                        chart.render();
+                    }
 
                     function updateChart() {
-                        yValue += (Math.random() - 0.5) * 0.1;
-                        dataPoints.push({
+                        var deltaY1, deltaY2;
+                        xValue += updateInterval;
+                        // adding random value
+                        yValue1 += Math.round(2 + Math.random() * (-2 - 2));
+                        yValue2 += Math.round(2 + Math.random() * (-2 - 2));
+
+                        // pushing the new values
+                        dataPoints1.push({
                             x: xValue,
-                            y: yValue
+                            y: yValue1
                         });
-                        xValue++;
+                        dataPoints2.push({
+                            x: xValue,
+                            y: yValue2
+                        });
+
+                        // updating legend text with  updated with y Value 
+                        chart.options.data[0].legendText = "Humidity(In)" + yValue1 + " %";
+                        chart.options.data[1].legendText = "Humidity(Out)" + yValue2 + " %";
                         chart.render();
-                    };
+                    }
+
                 }
             </script>
             <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
             <script src="https://kit.fontawesome.com/56016c02ef.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
