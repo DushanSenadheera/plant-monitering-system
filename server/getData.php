@@ -1,32 +1,30 @@
 <?php
 
-if(isset($_GET["temperature"]) && isset($_GET["humidity"]) && isset($_GET["WaterTemp"]) && isset($_GET["ldr"]) && isset($_GET["co2"]) && isset($_GET["temp_out"]) && isset($_GET["humidity_out"]) && isset($_GET["pH"]) && isset($_GET["N"]) && isset($_GET["P"]) && isset($_GET["K"])){
+include 'connection.php';
 
-   $temperature = $_GET["temperature"]; 
-   $humidity = $_GET["humidity"];
-   $WaterTemp = $_GET["WaterTemp"]; 
-   $ldr = $_GET["ldr"]; 
-   $co2 = $_GET["co2"]; 
-   $temp_out = $_GET["temp_out"];
-   $humidity_out = $_GET["humidity_out"];
-   $pH = $_GET["pH"];
-   $N = $_GET["N"];
-   $P = $_GET["P"];
-   $K = $_GET["K"];
+$sql = "SELECT * FROM greenhouse ORDER BY id DESC LIMIT 1";
 
-   include 'connection.php';
+$result = $conn->query($sql);
 
-   $sql = "INSERT INTO greenhouse (temp,humidity,co2,water_temp,ligh,ph,nitrogen,phosphorus,potassium,temp_out,humidity_out) 
-   VALUES ($temperature,$humidity,$co2,$WaterTemp,$ldr,$pH,$N,$P,$K,$temp_out,$humidity_out)";
+if ($result->num_rows > 0) {
 
-   if ($connection->query($sql) === TRUE) {
-      echo "New record created successfully";
-   } else {
-      echo "Error: " . $sql . " => " . $connection->error;
-   }
+  while($row = $result->fetch_assoc()) {
 
-   $connection->close();
+        $temperature = $row["temperature"];
+        $humidity = $row["humidity"];
+        $WaterTemp = $row["WaterTemp"];
+        $ldr = $row["ldr"];
+        $co2 = $row["co2"];
+        $temp_out = $row["temp_out"];
+        $humidity_out = $row["humidity_out"];
+        $pH = $row["pH"];
+        $N = $row["N"];
+        $P = $row["P"];
+        $K = $row["K"];
+        
   }
-else {
-   echo "values not set in the HTTP request";
+} else {
+  echo "0 results";
 }
+$conn->close();
+?>
