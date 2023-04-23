@@ -1,7 +1,7 @@
 <?php
 
 $dataPoints = array();
-$y = 5;
+$y = 28;
 for ($i = 0; $i < 10; $i++) {
     $y += rand(-1, 1) * 0.1;
     array_push($dataPoints, array("x" => $i, "y" => $y));

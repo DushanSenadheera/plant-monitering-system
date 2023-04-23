@@ -1,14 +1,14 @@
 <?php
 
 $dataPoints = array(
-  array("label" => "label", "y" => 20),
-  array("label" => "label", "y" => 65),
-  array("label" => "label", "y" => 11),
+  array("label" => "label", "y" => 28),
+  array("label" => "label", "y" => 70),
+  array("label" => "label", "y" => 80),
+  array("label" => "label", "y" => 32),
+  array("label" => "label", "y" => 10),
   array("label" => "label", "y" => 5),
-  array("label" => "label", "y" => 48),
-  array("label" => "label", "y" => 8),
-  array("label" => "label", "y" => 2),
-  array("label" => "label", "y" => 18)
+  array("label" => "label", "y" => 14),
+  array("label" => "label", "y" => 6.5)
 );
 
 ?>
@@ -60,19 +60,19 @@ $dataPoints = array(
         <div class="overviewContent">
           <div class="overviewCard">
             <h4>Temperature</h4>
-            <h3>31°C</h3>
+            <h3>28°C</h3>
           </div>
           <div class="overviewCard">
             <h4>Humidity</h4>
-            <h3>43%</h3>
+            <h3>70%</h3>
           </div>
           <div class="overviewCard">
             <h4>N:P:K</h4>
-            <h3>30:60:30</h3>
+            <h3>30:10:15</h3>
           </div>
           <div class="overviewCard">
             <h4>pH</h4>
-            <h3>6.0</h3>
+            <h3>6.5</h3>
           </div>
           <div class="overviewCard">
             <h4>Water Temp</h4>
