@@ -14,7 +14,7 @@ if(isset($_GET["temperature"]) && isset($_GET["humidity"]) && isset($_GET["Water
    $P = $_GET["P"];
    $K = $_GET["K"];
 
-   include 'connection.php';
+   include './server/connection.php';
 
    $sql = "INSERT INTO greenhouse (temp,humidity,co2,water_temp,ligh,ph,nitrogen,phosphorus,potassium,temp_out,humidity_out) 
    VALUES ($temperature,$humidity,$co2,$WaterTemp,$ldr,$pH,$N,$P,$K,$temp_out,$humidity_out)";
