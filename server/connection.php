@@ -10,7 +10,10 @@ $servername = "kfgk8u2ogtoylkq9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
    if ($connection->connect_error) {
       die("MySQL connection failed: " . $connection->connect_error);
    }
+   else{
+      echo "connnected succesfully...";
+   }
    
 ?>
 
-mysql://kih0ldprjrs8vcm7:wxfpj7z0q9gblr3z@kfgk8u2ogtoylkq9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/p384g3ggmy9dzqzv
+//mysql://kih0ldprjrs8vcm7:wxfpj7z0q9gblr3z@kfgk8u2ogtoylkq9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/p384g3ggmy9dzqzv
