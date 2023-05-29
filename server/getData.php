@@ -1,6 +1,6 @@
 <?php
 
-include 'connection.php';
+include './server/connection.php';
 
 $sql = "SELECT * FROM greenhouse ORDER BY id DESC LIMIT 1";
 
