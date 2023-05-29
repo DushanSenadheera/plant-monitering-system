@@ -30,3 +30,5 @@ if(isset($_GET["temperature"]) && isset($_GET["humidity"]) && isset($_GET["Water
 else {
    echo "values not set in the HTTP request";
 }
+
+?>
