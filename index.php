@@ -60,7 +60,7 @@ $dataPoints = array(
         <div class="overviewContent">
           <div class="overviewCard">
             <h4>Temperature</h4>
-            <h3>28°C</h3>
+            <h3>23°C</h3>
           </div>
           <div class="overviewCard">
             <h4>Humidity</h4>
